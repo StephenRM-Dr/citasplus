@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BarberPlus - Sistema de Gestión de Citas</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .navbar-brand {
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            background-color: #1a252f;
+            border-color: #1a252f;
+        }
+
+        .card-dashboard {
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .card-dashboard:hover {
+            transform: translateY(-5px);
+        }
+
+        .sidebar {
+            background-color: var(--primary);
+            color: white;
+            height: 100vh;
+            position: fixed;
+        }
+
+        .sidebar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            padding: 0.8rem 1rem;
+        }
+
+        .sidebar .nav-link:hover {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .sidebar .nav-link.active {
+            color: white;
+            background-color: var(--secondary);
+        }
+
+        .main-content {
+            margin-left: 250px;
+            padding: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        .calendar-container {
+            background: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card {
+            border: none;
+            border-radius: 10px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .public-header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 80px 0;
+            margin-bottom: 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar principal -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="bi bi-scissors"></i> BarberPlus
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Características</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#pricing">Precios</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="#login" class="btn btn-outline-primary me-2">Iniciar Sesión</a>
+                    <a href="#register" class="btn btn-primary">Registrarse</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Contenido principal - Página de inicio -->
+    <div class="container-fluid p-0">
+        <!-- Header público -->
+        <header class="public-header text-center">
+            <div class="container">
+                <h1 class="display-4 fw-bold">Sistema de Gestión de Citas para Negocios</h1>
+                <p class="lead">Optimiza la agenda de tu barbería, consultorio o spa con nuestro sistema de reservas
+                    online</p>
+                <a href="#register" class="btn btn-light btn-lg mt-3">Comenzar Ahora</a>
+            </div>
+        </header>
+
+        <!-- Sección de características -->
+        <section id="features" class="py-5">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold">Características Principales</h2>
+                    <p class="text-muted">Todo lo que necesitas para gestionar tus citas eficientemente</p>
+                </div>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="card card-dashboard h-100 text-center">
+                            <div class="card-body">
+                                <div class="feature-icon mb-3">
+                                    <i class="bi bi-calendar-check fs-1 text-primary"></i>
+                                </div>
+                                <h5 class="card-title">Reserva Online</h5>
+                                <p class="card-text">Permite a tus clientes reservar citas online con un calendario
+                                    interactivo disponible 24/7.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-dashboard h-100 text-center">
+                            <div class="card-body">
+                                <div class="feature-icon mb-3">
+                                    <i class="bi bi-whatsapp fs-1 text-primary"></i>
+                                </div>
+                                <h5 class="card-title">Recordatorios Automáticos</h5>
+                                <p class="card-text">Envía recordatorios automáticos por WhatsApp y email para reducir
+                                    las inasistencias.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card card-dashboard h-100 text-center">
+                            <div class="card-body">
+                                <div class="feature-icon mb-3">
+                                    <i class="bi bi-graph-up fs-1 text-primary"></i>
+                                </div>
+                                <h5 class="card-title">Dashboard de Gestión</h5>
+                                <p class="card-text">Controla tu agenda, historial de clientes y pagos desde un panel
+                                    intuitivo.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Demo del dashboard de negocio -->
+        <section class="py-5 bg-light">
+            <div class="container">
+                <div class="text-center mb-5">
+                    <h2 class="fw-bold">Dashboard de Negocio</h2>
+                    <p class="text-muted">Gestiona todas tus citas y clientes en un solo lugar</p>
+                </div>
+
+                <div class="row">
+                    <!-- Sidebar del dashboard -->
+                    <div class="col-md-3">
+                        <div class="sidebar rounded">
+                            <div class="p-4 text-center">
+                                <img src="https://via.placeholder.com/80" class="rounded-circle mb-3" alt="Negocio">
+                                <h5>Mi Barbería</h5>
+                                <p class="text-muted">Premium Barber Shop</p>
+                            </div>
+                            <hr>
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a class="nav-link active" href="#">
+                                        <i class="bi bi-speedometer2 me-2"></i> Dashboard
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <i class="bi bi-calendar-week me-2"></i> Agenda
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <i class="bi bi-people me-2"></i> Clientes
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <i class="bi bi-scissors me-2"></i> Servicios
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <i class="bi bi-person-badge me-2"></i> Empleados
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <i class="bi bi-graph-up me-2"></i> Reportes
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">
+                                        <i class="bi bi-gear me-2"></i> Configuración
+                                    </a>
+                                </li>
+                                <li class="nav-item mt-3">
+                                    <a class="nav-link" href="#">
+                                        <i class="bi bi-box-arrow-right me-2"></i> Cerrar Sesión
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Contenido principal del dashboard -->
+                    <div class="col-md-9">
+                        <div class="main-content">
+                            <div class="d-flex justify-content-between align-items-center mb-4">
+                                <h3>Dashboard</h3>
+                                <div>
+                                    <button class="btn btn-outline-secondary me-2">
+                                        <i class="bi bi-download me-1"></i> Exportar
+                                    </button>
+                                    <button class="btn btn-primary">
+                                        <i class="bi bi-plus-circle me-1"></i> Nueva Cita
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Resumen de estadísticas -->
+                            <div class="row mb-4">
+                                <div class="col-md-3">
+                                    <div class="card card-dashboard">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-grow-1">
+                                                    <h6 class="text-muted">Citas Hoy</h6>
+                                                    <h3>12</h3>
+                                                </div>
+                                                <div class="flex-shrink-0">
+                                                    <i class="bi bi-calendar-check fs-1 text-primary"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card card-dashboard">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-grow-1">
+                                                    <h6 class="text-muted">Ingresos Mes</h6>
+                                                    <h3>$2,450</h3>
+                                                </div>
+                                                <div class="flex-shrink-0">
+                                                    <i class="bi bi-currency-dollar fs-1 text-success"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card card-dashboard">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-grow-1">
+                                                    <h6 class="text-muted">Ocupación</h6>
+                                                    <h3>78%</h3>
+                                                </div>
+                                                <div class="flex-shrink-0">
+                                                    <i class="bi bi-person-check fs-1 text-info"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="card card-dashboard">
+                                        <div class="card-body">
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-grow-1">
+                                                    <h6 class="text-muted">Clientes Nuevos</h6>
+                                                    <h3>5</h3>
+                                                </div>
+                                                <div class="flex-shrink-0">
+                                                    <i class="bi bi-person-plus fs-1 text-warning"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Citas de hoy -->
+                            <div class="card mb-4">
+                                <div class="card-header bg-white">
+                                    <h5 class="mb-0">Citas de Hoy</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Hora</th>
+                                                    <th>Cliente</th>
+                                                    <th>Servicio</th>
+                                                    <th>Empleado</th>
+                                                    <th>Estado</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>09:00 AM</td>
+                                                    <td>Juan Pérez</td>
+                                                    <td>Corte de Cabello</td>
+                                                    <td>Carlos</td>
+                                                    <td><span class="badge bg-success">Confirmada</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">Editar</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>10:30 AM</td>
+                                                    <td>María García</td>
+                                                    <td>Arreglo de Barba</td>
+                                                    <td>Luis</td>
+                                                    <td><span class="badge bg-warning">Pendiente</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">Editar</button>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td>12:00 PM</td>
+                                                    <td>Roberto Sánchez</td>
+                                                    <td>Corte y Barba</td>
+                                                    <td>Carlos</td>
+                                                    <td><span class="badge bg-success">Confirmada</span></td>
+                                                    <td>
+                                                        <button class="btn btn-sm btn-outline-primary">Editar</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Calendario -->
+                            <div class="card">
+                                <div class="card-header bg-white">
+                                    <h5 class="mb-0">Calendario de Citas</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="calendar" style="min-height: 400px;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Página pública de reservas -->
+        <section class="py-5">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-md-10">
+                        <div class="card shadow">
+                            <div class="card-header bg-primary text-white py-4">
+                                <div class="d-flex align-items-center">
+                                    <img src="https://via.placeholder.com/60" class="rounded-circle me-3"
+                                        alt="Logo Negocio">
+                                    <div>
+                                        <h4 class="mb-0">Premium Barber Shop</h4>
+                                        <p class="mb-0">Reserva tu cita online</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-body p-4">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <h5>Selecciona un servicio</h5>
+                                        <div class="row mb-4">
+                                            <div class="col-md-6 mb-3">
+                                                <div class="card service-card">
+                                                    <div class="card-body text-center">
+                                                        <i class="bi bi-scissors fs-1 text-primary mb-2"></i>
+                                                        <h6>Corte de Cabello</h6>
+                                                        <p class="text-muted">30 min · $15.00</p>
+                                                        <button
+                                                            class="btn btn-outline-primary btn-sm">Seleccionar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="card service-card">
+                                                    <div class="card-body text-center">
+                                                        <i class="bi bi-star fs-1 text-primary mb-2"></i>
+                                                        <h6>Arreglo de Barba</h6>
+                                                        <p class="text-muted">20 min · $10.00</p>
+                                                        <button
+                                                            class="btn btn-outline-primary btn-sm">Seleccionar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="card service-card">
+                                                    <div class="card-body text-center">
+                                                        <i class="bi bi-lightning-charge fs-1 text-primary mb-2"></i>
+                                                        <h6>Corte y Barba</h6>
+                                                        <p class="text-muted">50 min · $22.00</p>
+                                                        <button
+                                                            class="btn btn-outline-primary btn-sm">Seleccionar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <div class="card service-card">
+                                                    <div class="card-body text-center">
+                                                        <i class="bi bi-eyedropper fs-1 text-primary mb-2"></i>
+                                                        <h6>Tinte de Cabello</h6>
+                                                        <p class="text-muted">60 min · $35.00</p>
+                                                        <button
+                                                            class="btn btn-outline-primary btn-sm">Seleccionar</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <h5>Selecciona fecha y hora</h5>
+                                        <div class="card mb-4">
+                                            <div class="card-body">
+                                                <div id="bookingCalendar" style="min-height: 300px;"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <div class="sticky-top" style="top: 20px;">
+                                            <div class="card">
+                                                <div class="card-header bg-light">
+                                                    <h6 class="mb-0">Resumen de tu cita</h6>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="mb-3">
+                                                        <small class="text-muted">Servicio</small>
+                                                        <p class="mb-0">Corte de Cabello</p>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <small class="text-muted">Fecha y Hora</small>
+                                                        <p class="mb-0">Viernes, 15 Sep 2023 · 10:30 AM</p>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <small class="text-muted">Duración</small>
+                                                        <p class="mb-0">30 minutos</p>
+                                                    </div>
+                                                    <div class="mb-3">
+                                                        <small class="text-muted">Precio</small>
+                                                        <p class="mb-0">$15.00</p>
+                                                    </div>
+                                                    <hr>
+                                                    <form>
+                                                        <div class="mb-3">
+                                                            <label for="name" class="form-label">Nombre completo</label>
+                                                            <input type="text" class="form-control" id="name">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="email" class="form-label">Email</label>
+                                                            <input type="email" class="form-control" id="email">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="phone" class="form-label">Teléfono</label>
+                                                            <input type="tel" class="form-control" id="phone">
+                                                        </div>
+                                                        <div class="mb-3">
+                                                            <label for="notes" class="form-label">Notas
+                                                                (opcional)</label>
+                                                            <textarea class="form-control" id="notes"
+                                                                rows="2"></textarea>
+                                                        </div>
+                                                        <div class="d-grid">
+                                                            <button class="btn btn-primary">Confirmar Reserva</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/es.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Calendario del dashboard
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                locale: 'es',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'dayGridMonth,timeGridWeek,timeGridDay'
+                },
+                events: [
+                    {
+                        title: 'Corte de Cabello - Juan Pérez',
+                        start: '2023-09-15T09:00:00',
+                        end: '2023-09-15T09:30:00',
+                        color: '#3498db'
+                    },
+                    {
+                        title: 'Arreglo de Barba - María García',
+                        start: '2023-09-15T10:30:00',
+                        end: '2023-09-15T10:50:00',
+                        color: '#e74c3c'
+                    },
+                    {
+                        title: 'Corte y Barba - Roberto Sánchez',
+                        start: '2023-09-15T12:00:00',
+                        end: '2023-09-15T12:50:00',
+                        color: '#3498db'
+                    }
+                ]
+            });
+            calendar.render();
+
+            // Calendario para reservas
+            var bookingCalendarEl = document.getElementById('bookingCalendar');
+            var bookingCalendar = new FullCalendar.Calendar(bookingCalendarEl, {
+                initialView: 'timeGridWeek',
+                locale: 'es',
+                headerToolbar: {
+                    left: 'prev,next today',
+                    center: 'title',
+                    right: 'timeGridWeek,timeGridDay'
+                },
+                slotMinTime: '08:00:00',
+                slotMaxTime: '20:00:00',
+                allDaySlot: false,
+                businessHours: {
+                    daysOfWeek: [1, 2, 3, 4, 5, 6],
+                    startTime: '8:00',
+                    endTime: '20:00',
+                },
+                weekends: true
+            });
+            bookingCalendar.render();
+        });
+    </script>
+</body>
+
+</html>

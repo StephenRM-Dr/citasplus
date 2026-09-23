@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CitasPlus | Demo Premium</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+</head>
+<body>
+    <div class="demo-container">
+        <div class="demo-overlay"></div>
+        
+        <div class="demo-content">
+            <!-- Header -->
+            <div class="text-center mb-5 animate-up">
+                <img src="logo.png" alt="CitasPlus Logo" style="height: 80px; margin-bottom: 1.5rem;">
+                <h1 class="text-white display-4 mb-2">Experimenta el Futuro</h1>
+                <p class="text-white opacity-75 fs-5">Interactúa con nuestro sistema de gestión inteligente.</p>
+            </div>
+
+            <div class="row align-items-stretch" style="display: flex; gap: 2rem;">
+                <!-- Booking Widget Column -->
+                <div class="booking-widget-container animate-up" style="flex: 1;">
+                    <div class="glass-card p-5 h-100" id="booking-widget">
+                        <div class="steps mb-4">
+                            <div class="step active" data-step="1">1</div>
+                            <div class="step" data-step="2">2</div>
+                            <div class="step" data-step="3">3</div>
+                        </div>
+
+                        <!-- Step 1: Services -->
+                        <div id="service-list">
+                            <h3 class="mb-4 text-white brand-font">Escoge un Servicio</h3>
+                            <button class="service-btn" data-service="Corte Premium">
+                                <i><i class="bi bi-scissors"></i></i>
+                                <div>
+                                    <h4 class="m-0">Corte Premium</h4>
+                                    <small class="opacity-50">45 min · $25.00</small>
+                                </div>
+                            </button>
+                            <button class="service-btn" data-service="Arreglo de Barba">
+                                <i><i class="bi bi-stars"></i></i>
+                                <div>
+                                    <h4 class="m-0">Arreglo de Barba</h4>
+                                    <small class="opacity-50">20 min · $15.00</small>
+                                </div>
+                            </button>
+                            <button class="service-btn" data-service="Full Service">
+                                <i><i class="bi bi-lightning-charge"></i></i>
+                                <div>
+                                    <h4 class="m-0">Full Service</h4>
+                                    <small class="opacity-50">60 min · $45.00</small>
+                                </div>
+                            </button>
+                        </div>
+
+                        <!-- Step 2: Calendar -->
+                        <div id="calendar-section" style="display: none;">
+                            <h3 class="mb-4 text-white brand-font">¿Cuándo vienes?</h3>
+                            <div class="calendar-mock glass p-3 rounded-4 mb-4">
+                                <div class="d-flex justify-content-between mb-2">
+                                    <small class="opacity-50">OCTUBRE 2023</small>
+                                </div>
+                                <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 5px; text-align: center;">
+                                    <div class="opacity-50 small">L</div><div class="opacity-50 small">M</div><div class="opacity-50 small">M</div><div class="opacity-50 small">J</div><div class="opacity-50 small">V</div><div class="opacity-50 small">S</div><div class="opacity-50 small">D</div>
+                                    <div class="p-1 opacity-25">28</div><div class="p-1 opacity-25">29</div><div class="p-1 opacity-25">30</div><div class="p-1">1</div><div class="p-1 bg-primary text-white rounded-circle">2</div><div class="p-1">3</div><div>4</div>
+                                </div>
+                            </div>
+                            <div class="time-grid"></div>
+                        </div>
+
+                        <!-- Step 3: Confirmation -->
+                        <div id="confirmation-section" style="display: none;">
+                            <h3 class="mb-4 text-white brand-font">Tus Detalles</h3>
+                            <div class="glass p-3 rounded-4 mb-4">
+                                <form>
+                                    <div style="margin-bottom: 1rem;">
+                                        <input type="text" placeholder="Tu Nombre" class="glass w-100 p-3 text-white border-0 rounded-3">
+                                    </div>
+                                    <div style="margin-bottom: 1.5rem;">
+                                        <input type="tel" placeholder="WhatsApp" class="glass w-100 p-3 text-white border-0 rounded-3">
+                                    </div>
+                                    <button class="btn-primary-demo w-100" id="confirm-booking">Confirmar Reserva</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dashboard Stats Column -->
+                <div id="dashboard-preview" class="animate-up" style="flex: 1.2;">
+                    <div class="glass-card p-5 h-100">
+                        <h3 class="mb-4 text-white brand-font">
+                            <i class="bi bi-graph-up text-primary me-2"></i> Control Total
+                        </h3>
+                        <div class="row" style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="dash-card">
+                                <small class="text-white opacity-50 uppercase">Ingresos Semanal</small>
+                                <div class="stat-val">$2,840</div>
+                                <small class="text-success"><i class="bi bi-arrow-up"></i> 12.5% vs ayer</small>
+                            </div>
+                            <div class="dash-card">
+                                <small class="text-white opacity-50 uppercase">Citas Hoy</small>
+                                <div class="stat-val">12</div>
+                                <small class="text-white opacity-50">8 confirmadas</small>
+                            </div>
+                        </div>
+
+                        <div class="mt-4 dash-card">
+                            <h4 class="mb-3 text-white brand-font"><i class="bi bi-calendar-event me-2"></i> Próximas Citas</h4>
+                            <div id="appointments-list">
+                                <div class="glass p-3 rounded-3 mb-2 d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="m-0 text-white">Alex Johnson</h5>
+                                        <small class="opacity-50">Corte Fade · 14:30</small>
+                                    </div>
+                                    <span style="color: #10b981;"><i class="bi bi-check-circle-fill"></i></span>
+                                </div>
+                                <div class="glass p-3 rounded-3 mb-2 d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h5 class="m-0 text-white">Sarah Miller</h5>
+                                        <small class="opacity-50">Barba · 15:15</small>
+                                    </div>
+                                    <span style="color: #f59e0b;"><i class="bi bi-clock-fill"></i></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-5 text-center">
+                            <p class="text-white opacity-75 mb-4">¿Quieres ver más? Únete a los negocios que ya están escalando.</p>
+                            <a href="../register" class="btn-primary-demo" style="text-decoration: none; display: inline-block;">Obtener Acceso Completo</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Integration & API Access -->
+            <div class="integration-mock animate-up" style="background: rgba(16, 185, 129, 0.05); border: 1px solid rgba(16, 185, 129, 0.2);">
+                <h4 class="mb-2 text-white"><i class="bi bi-gear-wide-connected me-2 text-primary"></i> Despliegue Inmediato</h4>
+                <p class="opacity-75 text-white">Integra este motor de reservas en cualquier sitio web pegando el siguiente código:</p>
+                <div class="position-relative mt-3">
+                    <code style="padding: 1.5rem; display: block; background: #000; border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: var(--primary);">
+                        &lt;script src="https://cdn.rincondigital.net/v1/booking.js" data-id="demo-001"&gt;&lt;/script&gt;
+                    </code>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <style>
+        .w-100 { width: 100%; }
+        .m-0 { margin: 0; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-3 { margin-bottom: 1rem; }
+        .mb-4 { margin-bottom: 1.5rem; }
+        .mb-5 { margin-bottom: 3rem; }
+        .mt-4 { margin-top: 1.5rem; }
+        .mt-5 { margin-top: 3rem; }
+        .p-1 { padding: 0.25rem; }
+        .p-3 { padding: 1rem; }
+        .p-5 { padding: 3rem; }
+        .text-white { color: white; }
+        .text-center { text-align: center; }
+        .d-flex { display: flex; }
+        .justify-content-between { justify-content: space-between; }
+        .align-items-center { align-items: center; }
+        .opacity-50 { opacity: 0.5; }
+        .opacity-75 { opacity: 0.75; }
+        .opacity-25 { opacity: 0.25; }
+        .uppercase { text-transform: uppercase; letter-spacing: 1px; font-size: 0.75rem; }
+        .fs-5 { font-size: 1.25rem; }
+        .display-4 { font-size: 3.5rem; font-weight: 800; }
+        .rounded-circle { border-radius: 50%; }
+        .rounded-3 { border-radius: 12px; }
+        .rounded-4 { border-radius: 18px; }
+        .bg-primary { background-color: var(--primary); }
+    </style>
+</body>
+</html>
