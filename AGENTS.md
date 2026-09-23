@@ -99,7 +99,6 @@ npm run build              # Vite production build
 
 These are the current state of an in-progress prototype, not necessarily bugs — **flag or ask before "fixing" them**, since some may be intentional or already tracked elsewhere:
 
-- **Not a git repository.** No `.git`, no `.gitignore`. Don't assume git commands or commit history are available.
 - **No README**, and this AGENTS.md/CLAUDE.md pair is the first onboarding documentation the project has had.
 - **No `.env.example`** — only a committed `.env` with real-looking local credentials (Postgres user/password, app key). If a repo is initialized, `.env` should be gitignored and an `.env.example` created before committing.
 - **`composer.json` is still named `laravel/laravel`** and the database is still named `barberplus` — remnants of the app's origin as a barbershop-specific build before the more generic "CitasPlus" branding was introduced. Renaming either is a real (if low-risk) change — don't do it silently.

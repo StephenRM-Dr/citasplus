@@ -6,4 +6,4 @@ CitasPlus is a Laravel 10 + PostgreSQL appointment-booking prototype (Spanish UI
 
 ## Claude Code-specific notes
 
-- This directory is **not currently a git repository** (no `.git`, no `.gitignore`). Git-based workflows — commits, branches, diffs against history — are unavailable until the user explicitly initializes one. Don't run `git init` or any git command without asking first.
+- This is a public GitHub repo (`github.com/StephenRM-Dr/citasplus`), part of the maintainer's portfolio — treat pushes, force-pushes, and history rewrites as high-consequence actions and confirm before running them.

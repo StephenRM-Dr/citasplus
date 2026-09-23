@@ -1,10 +1,28 @@
 # CitasPlus (BarberPlus)
 
+[![Laravel](https://img.shields.io/badge/Laravel-10-FF2D20?logo=laravel&logoColor=white)](https://laravel.com)
+[![PHP](https://img.shields.io/badge/PHP-8.1-777BB4?logo=php&logoColor=white)](https://php.net)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-pgsql-4169E1?logo=postgresql&logoColor=white)](https://www.postgresql.org)
+[![Vite](https://img.shields.io/badge/Vite-4-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
+[![Bootstrap](https://img.shields.io/badge/Bootstrap-5-7952B3?logo=bootstrap&logoColor=white)](https://getbootstrap.com)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Status](https://img.shields.io/badge/status-prototype%2Fdemo-orange)](AGENTS.md#8-known-gaps--inconsistencies)
+
 > **English summary:** CitasPlus is a Laravel 10 + PostgreSQL appointment-booking web app, prototyped around a barbershop use case (generic enough for any appointment-based service business). Public booking flow with real-time slot availability and double-booking prevention, plus a business dashboard/calendar. Stack: Laravel 10, PHP 8.1, PostgreSQL, Vite, Bootstrap 5, FullCalendar. See [Instalación](#instalación) below to run it locally, or [AGENTS.md](AGENTS.md) for the full technical breakdown (architecture, conventions, known gaps).
 
 Prototipo de aplicación web para gestión y reserva de citas online, pensado inicialmente para negocios tipo barbería/peluquería (aunque el modelo de datos es genérico para cualquier negocio de servicios con cita previa).
 
 > Documentación técnica para agentes/desarrolladores (stack, arquitectura, convenciones, deuda técnica conocida): ver [AGENTS.md](AGENTS.md).
+
+## Capturas
+
+| Landing pública | Reserva de cita |
+|---|---|
+| ![Landing](docs/screenshots/landing.png) | ![Reserva](docs/screenshots/booking.png) |
+
+| Dashboard del negocio | Agenda (calendario) |
+|---|---|
+| ![Dashboard](docs/screenshots/dashboard.png) | ![Agenda](docs/screenshots/calendar.png) |
 
 ## Funcionalidades
 
@@ -92,4 +110,3 @@ npm run build
 
 - No hay suite de tests configurada todavía (PHPUnit está como dependencia pero sin `tests/` ni `phpunit.xml`).
 - No hay linter configurado (Laravel Pint está instalado pero sin configuración ni script asociado).
-- El directorio raíz no es actualmente un repositorio git.

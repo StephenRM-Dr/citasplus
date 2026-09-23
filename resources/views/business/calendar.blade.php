@@ -60,7 +60,13 @@
     <div class="col-md-3 col-lg-2">
         <div class="sidebar">
             <div class="p-4 text-center">
-                <img src="{{ Auth::user()->business->logo_url ?? 'https://via.placeholder.com/80' }}" class="rounded-circle mb-3" alt="Negocio">
+                @if(Auth::user()->business->logo_url ?? false)
+                    <img src="{{ Auth::user()->business->logo_url }}" class="rounded-circle mb-3" alt="Negocio" style="width:80px;height:80px;object-fit:cover;">
+                @else
+                    <div class="rounded-circle mb-3 mx-auto d-flex align-items-center justify-content-center bg-white bg-opacity-25" style="width:80px;height:80px;">
+                        <i class="bi bi-shop fs-2"></i>
+                    </div>
+                @endif
                 <h5>{{ Auth::user()->business->name ?? 'Mi Negocio' }}</h5>
                 <p class="small text-muted mb-0">Dashboard Administrativo</p>
             </div>
